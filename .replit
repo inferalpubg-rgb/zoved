@@ -1,0 +1,10 @@
+run = "cd edprog && python3 run.py"
+entrypoint = "edprog/run.py"
+
+[env]
+PYTHONUNBUFFERED = "1"
+PORT = "3000"
+
+[nix]
+channel = "stable-23_05"
+
