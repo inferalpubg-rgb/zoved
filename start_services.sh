@@ -31,8 +31,7 @@ fi
 echo "✅ Публичный URL: $NGROK_URL"
 
 # Обновляем URL в bot.py
-WEBAPP_URL="${NGROK_URL}/auth_start.html"
-sed -i "s|WEBAPP_ = .*|WEBAPP_URL = '$WEBAPP_URL'|" bot.py
+WEBAPP_URL="${NGROK_U.*|WEBAPP_URL = '$WEBAPP_URL'|" bot.py
 echo "✅ Обновлен URL в bot.py: $WEBAPP_URL"
 
 # Запуск бота

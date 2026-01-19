@@ -3,121 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #111;
-            color: #fff;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        /* Градиентный фон с анимацией */
-        .gradient-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradientBG 10s ease infinite;
-            z-index: 1;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Загрузка */
-        .loader {
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-top: 5px solid #fff;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .loading-text {
-            font-size: 20px;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        /* Финальное состояние (скрыто сначала) */
-        .final-state {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .success-icon { font-size: 80px; margin-bottom: 20px; }
-        .back-btn {
-            margin-top: 30px;
-            padding: 12px 30px;
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.5);
-            color: white;
-            border-radius: 20px;
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-        }
-    </style>
+    <title data-i18n="success_title">Успешно!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="gradient-bg"></div>
+    <div class="auth-container">
+        <div class="glass success-container">
+            <div class="success-icon">✨</div>
 
-    <div class="content">
-        <div id="loadingBlock">
-            <div class="loader"></div>
-            <div class="loading-text">PLEASE WAIT...</div>
-        </div>
+            <h1 class="auth-title" data-i18n="success_title">Успешно!</h1>
+            
+            <p class="auth-subtitle" data-i18n="success_message">
+                Ваша личность проверена. Добро пожаловать!
+            </p>
 
-        <div id="successBlock" class="final-state">
-            <div class="success-icon">✅</div>
-            <h2>Success!</h2>
-            <p>You have successfully logged in.</p>
-            <button class="back-btn" onclick="window.Telegram.WebApp.close()">Close</button>
+            <div style="margin-top: 30px; padding: 20px; background: rgba(100, 200, 255, 0.1); border-radius: 12px; border: 1px solid rgba(100, 200, 255, 0.3);">
+                <p style="margin: 0; color: rgba(255, 255, 255, 0.7); font-size: 14px;">
+                    🎉 Вы прошли верификацию возраста 18+
+                </p>
+            </div>
+
+            <a href="/" class="btn btn-secondary" style="margin-top: 30px; text-decoration: none; display: inline-block;" data-i18n="back">
+                ← Назад на главную
+            </a>
         </div>
     </div>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
-
-        // Имитация задержки "красивой загрузки"
-        setTimeout(() => {
-            document.getElementById('loadingBlock').style.display = 'none';
-            const final = document.getElementById('successBlock');
-            final.style.display = 'block';
-            
-            // Небольшая задержка для плавного появления opacity
-            setTimeout(() => {
-                final.style.opacity = '1';
-                // Вибрация успеха
-                if(tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
-            }, 50);
-        }, 10000); // 3 секунды крутится загрузка
-    </script>
+    <script src="{{ url_for('static', filename='i18n.js') }}"></script>
 </body>
 </html>
